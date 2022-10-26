@@ -12,5 +12,7 @@ namespace Root.TmpData
             new EWAccount(){Id=4, AccountNumber="423456", AccountType=AccountType.Identified, Balance=1, HolderName = "Mansur"},
             new EWAccount(){Id=5, AccountNumber="523456", AccountType=AccountType.Unidentified, Balance=100000, HolderName = "Mansur"}
         };
+
+        public static List<AccountHistory> AccountHistories = new List<AccountHistory>();
     }
 }

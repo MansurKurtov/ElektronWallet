@@ -3,11 +3,11 @@
     /// <summary>
     /// 
     /// </summary>
-    public class ReplenishViewModel
+    public class AccountBalanceViewModel
     {
         /// <summary>
         /// 
         /// </summary>
-        public int AccountId { get; set; }
+        public double Balance { get; set; }
     }
 }
