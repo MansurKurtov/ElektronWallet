@@ -88,6 +88,7 @@ namespace EWallentApi.Controllers
         /// <param name="accountNumber"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "Digest")]
         public async Task<ResponseData> GetAccountHistoryForCurrentMonth(string accountNumber)
         {
             try
@@ -108,6 +109,7 @@ namespace EWallentApi.Controllers
         /// <param name="accountNumber"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "Digest")]
         public async Task<ResponseData> GetBalance(string accountNumber)
         {
             try
