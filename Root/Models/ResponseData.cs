@@ -53,9 +53,9 @@ namespace Root.Models
         public ResponseData(ResponseData response)
         {
             if (response.Code != 200)
-                HttpContextHelper.SetStatusCode(HttpStatusCode.InternalServerError);
+                HttpContextHelper.SetStatusCode(ResponseStatusCode.InternalServerError);
             else
-                HttpContextHelper.SetStatusCode(HttpStatusCode.OK);
+                HttpContextHelper.SetStatusCode(ResponseStatusCode.OK);
 
             Code = response.Code;
             Message = response.Message;
@@ -66,9 +66,9 @@ namespace Root.Models
         public ResponseData(ResponseData response, object data)
         {
             if (response.Code != 200)
-                HttpContextHelper.SetStatusCode(HttpStatusCode.InternalServerError);
+                HttpContextHelper.SetStatusCode(ResponseStatusCode.InternalServerError);
             else
-                HttpContextHelper.SetStatusCode(HttpStatusCode.OK);
+                HttpContextHelper.SetStatusCode(ResponseStatusCode.OK);
 
             Code = response.Code;
             Message = response.Message;
