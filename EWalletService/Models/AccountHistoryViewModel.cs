@@ -4,7 +4,8 @@ using System;
 namespace EWalletService.Models
 {
     /// <summary>
-    /// 
+    /// ViewModel для возврата истории учетной 
+    /// записи по информации об операциях
     /// </summary>
     public class AccountHistoryViewModel
     {
@@ -27,12 +28,12 @@ namespace EWalletService.Models
         }
 
         /// <summary>
-        /// 
+        /// Время операции
         /// </summary>
         public DateTime OperationTime { get; set; }
 
         /// <summary>
-        /// 
+        /// Сумма
         /// </summary>
         public double Amount { get; set; }
     }

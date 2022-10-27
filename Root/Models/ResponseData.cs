@@ -1,20 +1,22 @@
 ﻿using Newtonsoft.Json;
+using Root.Helpers;
+using System.Net;
 
 namespace Root.Models
 {
     /// <summary>
-    /// 
+    /// Этот класс использует для возврата результатов запроса
     /// </summary>
     public class ResponseData
     {
         /// <summary>
-        /// 
+        /// Код ошибки
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int Code { get; set; }
 
         /// <summary>
-        /// 
+        /// Сообщение
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Message { get; set; }

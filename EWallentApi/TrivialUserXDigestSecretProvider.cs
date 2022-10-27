@@ -6,7 +6,7 @@ namespace EWallentApi
     /// <summary>
     /// An example of how to implement IUsernameSecretProvider
     /// </summary>
-    internal class TrivialUsernameSecretProvider : IUsernameSecretProvider
+    internal class TrivialUserXDigestSecretProvider : IUsernameSecretProvider
     {
         public Task<string> GetSecretForUsernameAsync(string username)
         {

@@ -15,6 +15,16 @@ namespace EWalletService.Services
         /// <summary>
         /// 
         /// </summary>
+        private const double LimitForIdentUser = 10000;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private const double LimitForUnIdentUser = 100000;
+
+        /// <summary>
+        /// Этот метод помогает проверить существование аккаунта
+        /// </summary>
         /// <param name="accountNumber"></param>
         /// <returns></returns>
         public async Task<AccountExistanceViewModel> IsAccountAxists(string accountNumber)
@@ -27,7 +37,7 @@ namespace EWalletService.Services
         }
 
         /// <summary>
-        /// 
+        /// Пополнить счет
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -36,6 +46,15 @@ namespace EWalletService.Services
             var account = MyFakeDataBase.Accounts.FirstOrDefault(f => f.AccountNumber == data.AccountNumber);
             if (account == null)
                 return new ResponseData(ResponseStatus.NotFound, "Account not found(");
+
+
+            // проверка: максимальный баланс составляет 10.000 сомони для неидентифицированных счетов и
+            // 100.000 сомони для идентифицированных счетов
+            if ((account.Balance>=LimitForIdentUser && account.AccountType == AccountType.Identified) || 
+                    (account.Balance >= LimitForUnIdentUser && account.AccountType == AccountType.Unidentified))
+                return new ResponseData(ResponseStatus.BadRequest, "Limit error");
+
+            
 
             account.Balance += data.Amount;
 
@@ -53,7 +72,7 @@ namespace EWalletService.Services
         }
 
         /// <summary>
-        /// 
+        /// Получить отчет об операциях по счету за текущий месяц
         /// </summary>
         /// <returns></returns>
         public async Task<ResponseData> GetAccountHistoryForCurrentMonth()
@@ -66,7 +85,7 @@ namespace EWalletService.Services
         }
 
         /// <summary>
-        /// 
+        /// Получить информацию о балансе по номеру счета
         /// </summary>
         /// <param name="accountNumber"></param>
         /// <returns></returns>

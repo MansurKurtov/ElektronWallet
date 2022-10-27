@@ -1,7 +1,7 @@
 ﻿namespace EWalletService.Models
 {
     /// <summary>
-    /// 
+    /// ViewModel для возврата информации о существовании учетной записи
     /// </summary>
     public class AccountExistanceViewModel
     {

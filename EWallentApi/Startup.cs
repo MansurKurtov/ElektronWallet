@@ -32,7 +32,8 @@ namespace EWallentApi
             services.AddCors();
             services.AddMvc();
 
-            services.AddScoped<IUsernameHashedSecretProvider, TrivialUsernameHashedSecretProvider>();
+            //Регистрация классов, каторые доёт возможность изпользовать Digest Auth
+            services.AddScoped<IUsernameHashedSecretProvider, TrivialUserIdHashedSecretProvider>();
             services.AddAuthentication("Digest")
                     .AddDigestAuthentication(DigestAuthenticationConfiguration.Create("ElectronWalletSecret", "some-realm", 60, true, 20));
 
@@ -71,6 +72,7 @@ namespace EWallentApi
 
             var builder = new ContainerBuilder();
 
+            //Autofac даёт возможность автоматической регистрации сервисов
             EWalletService.ServicesStart.Builder(builder);
             builder.Populate(services);
             Container = builder.Build();

@@ -6,7 +6,7 @@ namespace EWallentApi
     /// <summary>
     /// An example of how to implement IUsernameHashedSecretProvider
     /// </summary>
-    internal class TrivialUsernameHashedSecretProvider : IUsernameHashedSecretProvider
+    internal class TrivialUserIdHashedSecretProvider : IUsernameHashedSecretProvider
     {
         public Task<string> GetA1Md5HashForUsernameAsync(string username, string realm)
         {

@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace EWallentApi.Controllers
 {
+    /// <summary>
+    /// В этом проекте я использовал проект DigestAuthentication GitHub для реализации Digest auth,
+    /// Для логирования я использовал Serilog и Autofac для автоматической регистрации/ввода сервисов
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class EWallentApiController : ControllerBase

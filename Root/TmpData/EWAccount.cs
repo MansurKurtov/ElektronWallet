@@ -1,7 +1,7 @@
 ﻿namespace Root.TmpData
 {
     /// <summary>
-    /// 
+    /// Класс для хранения модели данных учетной записи
     /// </summary>
     public class EWAccount
     {
@@ -21,7 +21,7 @@
         public string AccountNumber { get; set; }
 
         /// <summary>
-        /// 
+        /// Имя владельца
         /// </summary>
         public string HolderName { get; set; }
 
