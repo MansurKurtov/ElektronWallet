@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigestAuthentication.AspNetCore\DigestAuthentication.AspNetCore.csproj" />
-    <ProjectReference Include="..\DigestAuthentication.Implementation\DigestAuthentication.Implementation.csproj" />
   </ItemGroup>
 
 </Project>

@@ -14,27 +14,28 @@ namespace EWalletService.Services
         /// </summary>
         /// <param name="accountNumber"></param>
         /// <returns></returns>
-        Task<AccountExistanceViewModel> IsAccountAxists(string accountNumber);
+        Task<AccountExistanceViewModel> IsAccountAxistsAsync(string accountNumber);
 
         /// <summary>
         /// Пополнение электронного кошелька.
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        Task<ResponseData> ReplenishAccount(ReplenishPostModel data);
+        Task<ResponseData> ReplenishAccountAsync(ReplenishPostModel data);
 
         /// <summary>
         /// Получить общее количество и суммы операций пополнения за текущий месяц
         /// </summary>
+        /// <param name="accountNumber"></param>
         /// <returns></returns>
-        Task<ResponseData> GetAccountHistoryForCurrentMonth();
+        Task<ResponseData> GetAccountHistoryForCurrentMonthAsync(string accountNumber);
 
         /// <summary>
         /// Получить баланс электронного кошелька
         /// </summary>
         /// <param name="accountNumber"></param>
         /// <returns></returns>
-        Task<ResponseData> GetBalance(string accountNumber);
+        Task<ResponseData> GetBalanceAsync(string accountNumber);
 
         
         

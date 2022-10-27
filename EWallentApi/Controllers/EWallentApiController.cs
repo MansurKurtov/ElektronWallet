@@ -1,4 +1,5 @@
-﻿using EWalletService.Services;
+﻿using EWalletService.Models;
+using EWalletService.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Root.Models;
@@ -37,15 +38,78 @@ namespace EWallentApi.Controllers
         {
             try
             {
-                var result = await _electronWalletService.IsAccountAxists(accountNumber);
+                var result = await _electronWalletService.IsAccountAxistsAsync(accountNumber);
                 return new ResponseData(ResponseStatus.Ok, result);
             }
             catch(Exception ex)
             {
-                _logger.Error("Ошибка в методе modules:" + ex.Message);
-                _logger.Information("Подробная информация об ошибке: " + ex.InnerException);
+                _logger.Error("Ошибка в методе IsAccountAxists:" + ex.Message);
+                _logger.Information("Подробная информация об ошибке: " + ex.StackTrace);
                 return new ResponseData(ResponseStatus.InternalServerError, ex.Message);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = "Digest")]
+        public async Task<ResponseData> ReplenishAccount([FromBody] ReplenishPostModel data)
+        {
+            try
+            {
+                return await _electronWalletService.ReplenishAccountAsync(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Ошибка в методе ReplenishAccount:" + ex.Message);
+                _logger.Information("Подробная информация об ошибке: " + ex.StackTrace);
+                return new ResponseData(ResponseStatus.InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accountNumber"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ResponseData> GetAccountHistoryForCurrentMonth(string accountNumber)
+        {
+            try
+            {
+                return await _electronWalletService.GetAccountHistoryForCurrentMonthAsync(accountNumber);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Ошибка в методе GetAccountHistoryForCurrentMonth:" + ex.Message);
+                _logger.Information("Подробная информация об ошибке: " + ex.StackTrace);
+                return new ResponseData(ResponseStatus.InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accountNumber"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ResponseData> GetBalance(string accountNumber)
+        {
+            try
+            {
+                return await _electronWalletService.GetBalanceAsync(accountNumber);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Ошибка в методе GetBalance:" + ex.Message);
+                _logger.Information("Подробная информация об ошибке: " + ex.StackTrace);
+                return new ResponseData(ResponseStatus.InternalServerError, ex.Message);
+            }
+
+        }
+
     }
 }

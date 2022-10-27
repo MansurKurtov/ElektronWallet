@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using Root.Helpers;
 using Serilog;
 using System;
@@ -42,33 +41,8 @@ namespace EWallentApi
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
             services.AddSingleton(Log.Logger); //For logging
-            services.AddSwaggerGen(c =>
-            {
-
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Electron Wallet Api", Version = "v1" });
-                var securitySchema = new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "bearer",
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                };
-
-                c.AddSecurityDefinition("Bearer", securitySchema);
-
-                var securityRequirement = new OpenApiSecurityRequirement
-                {
-                    { securitySchema, new[] { "Bearer" } }
-                };
-
-                c.AddSecurityRequirement(securityRequirement);
-            });
+            
+            
 
             var builder = new ContainerBuilder();
 
@@ -84,9 +58,7 @@ namespace EWallentApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ManagementApi v1"));
+            }            
             app.UseRouting();
 
             app.UseCors(builder => builder

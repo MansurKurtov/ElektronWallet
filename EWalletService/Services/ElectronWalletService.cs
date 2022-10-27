@@ -27,7 +27,7 @@ namespace EWalletService.Services
         /// </summary>
         /// <param name="accountNumber"></param>
         /// <returns></returns>
-        public async Task<AccountExistanceViewModel> IsAccountAxists(string accountNumber)
+        public async Task<AccountExistanceViewModel> IsAccountAxistsAsync(string accountNumber)
         {
             var item = MyFakeDataBase.Accounts.FirstOrDefault(f => f.AccountNumber == accountNumber);
             var result = new AccountExistanceViewModel();
@@ -41,7 +41,7 @@ namespace EWalletService.Services
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public async Task<ResponseData> ReplenishAccount(ReplenishPostModel data)
+        public async Task<ResponseData> ReplenishAccountAsync(ReplenishPostModel data)
         {
             var account = MyFakeDataBase.Accounts.FirstOrDefault(f => f.AccountNumber == data.AccountNumber);
             if (account == null)
@@ -74,11 +74,16 @@ namespace EWalletService.Services
         /// <summary>
         /// Получить отчет об операциях по счету за текущий месяц
         /// </summary>
+        /// <param name="accountNumber"></param>
         /// <returns></returns>
-        public async Task<ResponseData> GetAccountHistoryForCurrentMonth()
+        public async Task<ResponseData> GetAccountHistoryForCurrentMonthAsync(string accountNumber)
         {
             var currentMonth = ServerDataHelper.GetCurrentMonthNumber();
-            var items = MyFakeDataBase.AccountHistories.Where(w => w.OperationTime.Month == currentMonth).ToList();
+            var account = MyFakeDataBase.Accounts.FirstOrDefault(f => f.AccountNumber == accountNumber);
+            if (account == null)
+                return new ResponseData(ResponseStatus.NotFound, "Account not found(");
+
+            var items = MyFakeDataBase.AccountHistories.Where(w => w.AccointId == account.Id && w.OperationTime.Month == currentMonth).ToList();
             var result = items?.Select(s => new AccountHistoryViewModel(s)).ToList();
 
             return new ResponseData(ResponseStatus.Ok, result);
@@ -89,7 +94,7 @@ namespace EWalletService.Services
         /// </summary>
         /// <param name="accountNumber"></param>
         /// <returns></returns>
-        public async Task<ResponseData> GetBalance(string accountNumber)
+        public async Task<ResponseData> GetBalanceAsync(string accountNumber)
         {
             var account = MyFakeDataBase.Accounts.FirstOrDefault(f => f.AccountNumber == accountNumber);
             if (account == null)
