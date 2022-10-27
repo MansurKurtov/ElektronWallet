@@ -10,17 +10,29 @@ using System.Threading.Tasks;
 namespace EWallentApi.Controllers
 {
     /// <summary>
-    /// В этом проекте я использовал проект DigestAuthentication GitHub для реализации Digest auth,
-    /// Для логирования я использовал Serilog и Autofac для автоматической регистрации/ввода сервисов
+    /// В этом проекте я использовал GitHub проект DigestAuthentication для реализации Digest auth,
+    /// Для логирования я использовал Serilog и Autofac для автоматической регистрации/injection сервисов
     /// 
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class EWallentApiController : ControllerBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly ILogger _logger;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly IElectronWalletService _electronWalletService;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="electronWalletService"></param>
         public EWallentApiController(ILogger logger, IElectronWalletService electronWalletService)
         {
             _electronWalletService = electronWalletService;
